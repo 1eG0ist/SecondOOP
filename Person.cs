@@ -28,8 +28,8 @@ namespace SecondOOP
             this.x = x;
             this.y = y;
             coords_of_persons.Add(new int[] { x, y });
-            counter_of_instance++;
             num_of_person = counter_of_instance;
+            counter_of_instance++;
         }
 
         public void movex(int dx)

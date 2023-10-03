@@ -73,8 +73,12 @@ class Program
                     Console.Write(" | ");
                 }
             }
-            Console.WriteLine("\nQ - Show info\nW - change selected pers number\nE - hit\nR - regen health\nT - regen full health\nY - is assign to fracture");
-            switch(Console.ReadKey().Key)
+            Console.WriteLine("\nQ - Show info\nW - change selected pers number\nE - hit\nR - regen health\nT - regen full health\nY - is assign to fracture\n" +
+                "A - move by x coord\nD - move by y coord");
+
+            ConsoleKey input_key = Console.ReadKey().Key;
+            Console.WriteLine("\n");
+            switch (input_key)
             {
                 case ConsoleKey.Q:
                     persons[selected_person].print();
@@ -198,6 +202,35 @@ class Program
                         }
                     }
                     break;
+
+                case ConsoleKey.A:
+                    try
+                    {
+                        Console.WriteLine("Enter on how many you want to move: ");
+                        int how_many_move = int.Parse(Console.ReadLine());
+                        persons[selected_person].movex(how_many_move);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Something went wrong! Press any key to continue: ");
+                        Console.ReadKey();
+                    }
+                    break;
+
+                case ConsoleKey.D:
+                    try
+                    {
+                        Console.WriteLine("Enter on how many you want to move: ");
+                        int how_many_movee = int.Parse(Console.ReadLine());
+                        persons[selected_person].movey(how_many_movee);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Something went wrong! Press any key to continue: ");
+                        Console.ReadKey();
+                    }
+                    break;
+
             }
         }
     }
