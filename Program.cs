@@ -52,13 +52,35 @@ class Program
         while (true)
         {
             Console.Clear();
-            Console.Write($"{selected_person+1} selected || ");
+            int count_vikings = 0;
+            int count_toris = 0;
+            for (int i = 0; i < persons.Count; i++)
+            {
+                if (persons[i].getHealth() != 0)
+                {
+                    if (persons[i].getFracture() == "viking") count_vikings++;
+                    else count_toris++;
+                }
+            }
+            if (count_vikings == 0)
+            {
+                Console.WriteLine("Toris win!");
+                return;
+            } else if (count_toris == 0)
+            {
+                Console.WriteLine("Vikings win!");
+                return;
+            }
+            Console.Write($"{selected_person + 1} selected || ");
             for (int i = 0; i < persons.Count; i++)
             {
                 if (persons[i].getHealth() > 50)
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                 } else if (persons[i].getHealth() > 25)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                } else if (persons[i].getHealth() > 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                 } else
@@ -155,14 +177,20 @@ class Program
                         Random random = new Random();
                         if (random.Next(10) == 5)
                         {
-                            Console.WriteLine($"You have CRIT!!! Person №{n_of_atacked_person} is dead! Press any key to continue: ");
+                            Console.WriteLine($"You have CRIT!!! Person №{n_of_atacked_person+1} is dead! Press any key to continue: ");
                             persons[n_of_atacked_person].del();
                             Console.ReadKey();
                         } else
                         {
                             int dmg = random.Next(5, 15);
                             persons[n_of_atacked_person].uron(dmg);
-                            Console.WriteLine($"You hited person №{n_of_atacked_person} on {dmg} damage! Press any key to continue: ");
+                            if (persons[n_of_atacked_person].getHealth() > 0)
+                            {
+                                Console.WriteLine($"You hited person №{n_of_atacked_person + 1} on {dmg} damage! Press any key to continue: ");
+                            } else
+                            {
+                                Console.WriteLine($"Person №{n_of_atacked_person + 1} is dead! Press any key to continue: ");
+                            }
                             Console.ReadKey();
                         }
                         Console.Clear();

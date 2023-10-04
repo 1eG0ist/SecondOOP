@@ -54,8 +54,7 @@ namespace SecondOOP
             health -= uron;
             if (health <= 0)
             {
-                Console.WriteLine($"Person {num_of_person} dead! Press any key to continue");
-                Console.ReadKey();
+                health = 0;
             }
         }
 
@@ -92,7 +91,7 @@ namespace SecondOOP
 
         public int[] getCoords()
         {
-            return new int[] {x, y };
+            return new int[] { x, y };
         }
 
         public string getFracture()
