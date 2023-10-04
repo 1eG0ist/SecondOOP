@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SecondOOP
 {
-    internal class Person
+    public class Person
     {
         public List<int[]> coords_of_persons = new List<int[]>();
         private static int counter_of_instance = 0;
@@ -47,8 +47,6 @@ namespace SecondOOP
         public void del() 
         {
             health = 0;
-            Console.WriteLine($"Person {num_of_person} dead! Press any key to continue");
-            Console.ReadKey();
         }
 
         public void uron(int uron)

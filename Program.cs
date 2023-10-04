@@ -52,7 +52,7 @@ class Program
         while (true)
         {
             Console.Clear();
-            Console.Write($"{selected_person} selected || ");
+            Console.Write($"{selected_person+1} selected || ");
             for (int i = 0; i < persons.Count; i++)
             {
                 if (persons[i].getHealth() > 50)
@@ -66,7 +66,7 @@ class Program
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
                 int[] coords = persons[i].getCoords();
-                Console.Write($"Pers№{i}:{{{coords[0]}, {coords[1]}}}");
+                Console.Write($"Pers№{i+1}:{{{coords[0]}, {coords[1]}}}");
                 Console.ForegroundColor = ConsoleColor.White;
                 if (i != persons.Count - 1)
                 {
@@ -116,7 +116,7 @@ class Program
                     int n_of_atacked_person;
                     try
                     {
-                        n_of_atacked_person = int.Parse(Console.ReadLine());
+                        n_of_atacked_person = int.Parse(Console.ReadLine())-1;
                     }
                     catch
                     {
@@ -127,6 +127,11 @@ class Program
                     if (n_of_atacked_person < 0 || n_of_atacked_person >= persons.Count)
                     {
                         Console.WriteLine($"Incorrect number, you have only {persons.Count} persons. Press any key to continue: ");
+                        Console.ReadKey();
+                        Console.Clear();
+                    } else if (n_of_atacked_person == selected_person)
+                    {
+                        Console.WriteLine("The game does not support suicide, you cann't hit your self. Press any key to continue: ");
                         Console.ReadKey();
                         Console.Clear();
                     } else if (!(persons[n_of_atacked_person].getCoords()[0] == persons[selected_person].getCoords()[0]
@@ -151,6 +156,7 @@ class Program
                         if (random.Next(10) == 5)
                         {
                             Console.WriteLine($"You have CRIT!!! Person №{n_of_atacked_person} is dead! Press any key to continue: ");
+                            persons[n_of_atacked_person].del();
                             Console.ReadKey();
                         } else
                         {
